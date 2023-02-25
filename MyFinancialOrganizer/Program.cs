@@ -1,4 +1,6 @@
 
+using MyFinancialOrganizer.Api.Extensions;
+
 namespace MyFinancialOrganizer
 {
     public class Program
@@ -12,7 +14,9 @@ namespace MyFinancialOrganizer
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerServices();
+
+            builder.Services.AddAuthenticationServices(builder.Configuration);
 
             var app = builder.Build();
 
@@ -24,6 +28,8 @@ namespace MyFinancialOrganizer
             }
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
